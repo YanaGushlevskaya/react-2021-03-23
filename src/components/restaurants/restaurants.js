@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
+import Basket from '../basket';
+import Header from '../header';
+import style from './style.module.css';
 
 const Restaurants = ({ restaurants }) => {
   const [activeRestaurantId, setActiveRestaurant] = useState(restaurants[0].id);
@@ -16,11 +19,14 @@ const Restaurants = ({ restaurants }) => {
 
   return (
     <div>
-      <Tabs
-        tabs={tabs}
-        activeId={activeRestaurantId}
-        onChange={setActiveRestaurant}
-      />
+      <div className={style['header--bottom']}>
+        <Tabs
+          tabs={tabs}
+          activeId={activeRestaurantId}
+          onChange={setActiveRestaurant}
+        />
+        <Basket restaurant={activeRestaurant} />
+      </div>
       <Restaurant restaurant={activeRestaurant} />
     </div>
   );
