@@ -4,16 +4,18 @@ import useForm from '../../../hooks/use-form';
 import Rate from '../../rate';
 import styles from './review-form.module.css';
 import { connect } from 'react-redux';
+import { usercreate, reviewcreate } from '../../../redux/actions';
 import Button from '../../button';
 
 const INITIAL_VALUES = { name: '', text: '', rating: 3 };
 
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = ({ userCreate, reviewCreate, activeRestaurant }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    onSubmit(values);
+    userCreate(values);
+    reviewCreate(values);
     reset();
   };
 
@@ -51,6 +53,9 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
-}))(ReviewForm);
+export default connect(null, (dispatch) => {
+  return {
+    userCreate: ({ name }) => (dispatch(usercreate(name))),
+    reviewCreate: ({ text, rating, activeRestaurant }) => (dispatch(reviewcreate(text, rating, activeRestaurant))),
+  }
+})(ReviewForm);

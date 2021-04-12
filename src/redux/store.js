@@ -6,5 +6,5 @@ import reducer from './reducer';
 
 export default createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(logger))
+  applyMiddleware(logger)
 );
