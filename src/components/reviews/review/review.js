@@ -8,6 +8,7 @@ import { reviewWitUserSelector } from '../../../redux/selectors';
 
 const Review = ({ user, text, rating }) => (
   <div className={styles.review} data-id="review">
+    {console.log(text)}
     <div className={styles.content}>
       <div>
         <h4 className={styles.name} data-id="review-user">

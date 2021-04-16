@@ -13,6 +13,8 @@ const Product = ({ product, amount, increment, decrement, fetchData }) => {
     fetchData && fetchData(product.id);
   }, []); // eslint-disable-line
 
+  if (!product) return <div></div>;
+
   return (
     <div className={styles.product} data-id="product">
       <div className={styles.content}>
@@ -42,7 +44,7 @@ Product.propTypes = {
     name: PropTypes.string,
     price: PropTypes.number,
     ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  }).isRequired,
+  }),
   fetchData: PropTypes.func,
   // from connect
   amount: PropTypes.number,
